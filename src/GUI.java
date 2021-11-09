@@ -1,4 +1,9 @@
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.AttributeSet.FontAttribute;
+
 import java.awt.*;
 
 public class GUI {
@@ -6,8 +11,13 @@ public class GUI {
 	// GUI objects
 	JFrame mainFrame = new JFrame();
 	JPanel mainPanel = new JPanel();
+	JPanel northPanel = new JPanel();
+	JPanel centerPanel = new JPanel();
+	JPanel southPanel = new JPanel();
 	JPanel optionPanel = new JPanel();
 	JPanel userInputPanel = new JPanel();
+	JPanel resultPanel = new JPanel();
+	JPanel userInteractionsPanel = new JPanel();
 	
 	JLabel titleLabel = new JLabel();
 	JLabel userLabel = new JLabel();
@@ -20,38 +30,66 @@ public class GUI {
 	JButton decryptButton = new JButton();
 	JButton generatePass = new JButton();
 	JButton storeButton = new JButton();
-	JButton calculatePass = new JButton();
 	
 	public GUI() {
 		
 		mainFrame.setTitle("Password Application");
-		mainFrame.setSize(500,500);
+		mainFrame.setSize(400, 300);
 		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.add(mainPanel);
 		
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new BorderLayout());
 		
+		mainPanel.add(northPanel, BorderLayout.NORTH);
 		titleLabel.setText("Password Application");
 		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		titleLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		mainPanel.add(titleLabel);
+		Font myFont = new Font("Times New Roman", Font.BOLD, 20);
+		titleLabel.setFont(myFont);
+		northPanel.add(titleLabel);
 		
-		mainPanel.add(optionPanel);
+		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.PAGE_AXIS));
+		optionPanel.setLayout(new FlowLayout());
+		userInputPanel.setLayout(new FlowLayout());
+		resultPanel.setLayout(new FlowLayout());
+		
+		mainPanel.add(centerPanel, BorderLayout.CENTER);
+		centerPanel.add(optionPanel);
+		
+		TitledBorder optionBorder = BorderFactory.createTitledBorder("Options");
+		optionBorder.setTitleJustification(TitledBorder.LEFT);
+		optionPanel.setBorder(optionBorder);
+
 		encryptButton.setText("Encrypt");
+		encryptButton.addActionListener(new EncryptAction());
 		optionPanel.add(encryptButton);
+		
+		
 		decryptButton.setText("Decrypt");
+		decryptButton.addActionListener(new DecryptAction());
 		optionPanel.add(decryptButton);
+		
 		generatePass.setText("Generate Password");
+		generatePass.addActionListener(new GenerateAction());
 		optionPanel.add(generatePass);
 		
-		mainPanel.add(userInputPanel);
+		centerPanel.add(userInputPanel);
+		centerPanel.add(resultPanel);
+		
+		TitledBorder userInteractionsBorder = BorderFactory.createTitledBorder("Users Input/Results");
+		userInteractionsBorder.setTitleJustification(TitledBorder.LEFT);
+		
 		userLabel.setText("Enter Password: ");
 		userInputPanel.add(userLabel);
 		userInputPanel.add(userInputField);
+		resultLabel.setText("Result: ");
+		resultPanel.add(resultLabel);
+		resultPanel.add(resultField);
 		
-		
-		
+		centerPanel.add(southPanel, BorderLayout.SOUTH);
+		storeButton.setText("Store");
+		southPanel.add(storeButton);
+		storeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		mainFrame.setVisible(true);
 		
