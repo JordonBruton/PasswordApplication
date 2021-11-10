@@ -7,9 +7,9 @@ public class EncryptAction implements ActionListener {
 	static String userPass;
 	int s;
 	char change;
-	String resultPass;
-	ArrayList<Character> userPassList = new ArrayList<>();
-	ArrayList<Character> encryptedPassList = new ArrayList<>();
+	static public String resultPass = "";
+	static public ArrayList<Character> userPassList = new ArrayList<>();
+	static public ArrayList<Character> encryptedPassList = new ArrayList<>();
 	
 	public void actionPerformed(ActionEvent e) {
 		userPass = GUI.getUserInput();
@@ -30,5 +30,7 @@ public class EncryptAction implements ActionListener {
 		
 		GUI.resultField.setText(resultPass);
 	}
+	
+	
 }
 

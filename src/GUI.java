@@ -26,7 +26,8 @@ public class GUI {
 	JButton encryptButton = new JButton();
 	JButton decryptButton = new JButton();
 	JButton generatePass = new JButton();
-	JButton storeButton = new JButton();
+	JButton storeButton = new JButton(); 
+	JButton clearButton = new JButton();
 	
 	public GUI() {
 		
@@ -86,6 +87,11 @@ public class GUI {
 		centerPanel.add(southPanel, BorderLayout.SOUTH);
 		storeButton.setText("Store");
 		southPanel.add(storeButton);
+		
+		clearButton.setText("Clear");
+		clearButton.addActionListener(new ClearAction());
+		southPanel.add(clearButton);
+		
 		storeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		mainFrame.setVisible(true);
