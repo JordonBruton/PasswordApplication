@@ -1,8 +1,5 @@
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.FontUIResource;
-import javax.swing.text.AttributeSet.FontAttribute;
 
 import java.awt.*;
 
@@ -23,8 +20,8 @@ public class GUI {
 	JLabel userLabel = new JLabel();
 	JLabel resultLabel = new JLabel();
 	
-	JTextField userInputField = new JTextField(10);
-	JTextField resultField = new JTextField(10);
+	static JTextField userInputField = new JTextField(10);
+	static JTextField resultField = new JTextField(10);
 	
 	JButton encryptButton = new JButton();
 	JButton decryptButton = new JButton();
@@ -93,5 +90,9 @@ public class GUI {
 		
 		mainFrame.setVisible(true);
 		
+	}
+	
+	static public String getUserInput() {
+		return userInputField.getText();
 	}
 }
