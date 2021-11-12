@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class EncryptAction implements ActionListener {
+public class EncryptAction implements ActionListener, GUIComponents {
 	static String userPass;
 	int s;
 	char change;
@@ -13,22 +13,32 @@ public class EncryptAction implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		userPass = GUI.getUserInput();
-		
-		for(char ch : userPass.toCharArray()) {
-			userPassList.add(ch);
+
+		if (easyEncryptBox.isSelected()) {
+			
+			for(char ch : userPass.toCharArray()) {
+				userPassList.add(ch);
+			}
+			
+			for (int i = 0; i < userPassList.size(); i++) {
+				s = userPassList.get(i) + 5;
+				change = (char)s;
+				encryptedPassList.add(change);	
+			}
+			
+			for (char ch : encryptedPassList) {
+				resultPass += ch;
+			}
+			
+			GUI.resultField.setText(resultPass);
 		}
-		
-		for (int i = 0; i < userPassList.size(); i++) {
-			s = userPassList.get(i) + 5;
-			change = (char)s;
-			encryptedPassList.add(change);	
+		else if(mediumEncryptBox.isSelected()) {
+			System.out.println("Medium Encrypt");
 		}
-		
-		for (char ch : encryptedPassList) {
-			resultPass += ch;
+		else if(hardEncryptBox.isSelected()) {
+			System.out.println("Hard Encrypt");
 		}
-		
-		GUI.resultField.setText(resultPass);
+
 	}
 	
 	

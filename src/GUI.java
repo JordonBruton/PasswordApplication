@@ -1,41 +1,18 @@
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
 import java.awt.*;
 
-public class GUI {
-	
-	// GUI objects
-	JFrame mainFrame = new JFrame();
-	JPanel mainPanel = new JPanel();
-	JPanel northPanel = new JPanel();
-	JPanel centerPanel = new JPanel();
-	JPanel southPanel = new JPanel();
-	JPanel optionPanel = new JPanel();
-	JPanel userInputPanel = new JPanel();
-	JPanel resultPanel = new JPanel();
-	JPanel userInteractionsPanel = new JPanel();
-	
-	JLabel titleLabel = new JLabel();
-	JLabel userLabel = new JLabel();
-	JLabel resultLabel = new JLabel();
-	
-	static JTextField userInputField = new JTextField(10);
-	static JTextField resultField = new JTextField(10);
-	
-	JButton encryptButton = new JButton();
-	JButton decryptButton = new JButton();
-	JButton generatePass = new JButton();
-	JButton storeButton = new JButton(); 
-	JButton clearButton = new JButton();
+public class GUI extends JFrame implements GUIComponents {
+
 	
 	public GUI() {
 		
-		mainFrame.setTitle("Password Application");
-		mainFrame.setSize(400, 300);
-		mainFrame.setResizable(false);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.add(mainPanel);
+		setTitle("Password Application");
+		setSize(400, 350);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		add(mainPanel);
 		
 		mainPanel.setLayout(new BorderLayout());
 		
@@ -58,28 +35,42 @@ public class GUI {
 		optionBorder.setTitleJustification(TitledBorder.LEFT);
 		optionPanel.setBorder(optionBorder);
 
+		//Adding CheckBoxs to button group 
+		encryptDifficultyGroup.add(easyEncryptBox);
+		encryptDifficultyGroup.add(mediumEncryptBox);
+		encryptDifficultyGroup.add(hardEncryptBox);
+		
+		//optionalPanel
 		encryptButton.setText("Encrypt");
 		encryptButton.addActionListener(new EncryptAction());
 		optionPanel.add(encryptButton);
-		
-		
 		decryptButton.setText("Decrypt");
 		decryptButton.addActionListener(new DecryptAction());
 		optionPanel.add(decryptButton);
-		
 		generatePass.setText("Generate Password");
 		generatePass.addActionListener(new GenerateAction());
 		optionPanel.add(generatePass);
+		optionPanel.add(encyrptDifficultyCheckBoxJPanel);
 		
+		//encyrptDifficultyCheckBoxJPanel
+		encyrptDifficultyCheckBoxJPanel.setLayout(new FlowLayout());
+		encyrptDifficultyCheckBoxJPanel.add(easyEncryptBox);
+		encyrptDifficultyCheckBoxJPanel.add(mediumEncryptBox);
+		encyrptDifficultyCheckBoxJPanel.add(hardEncryptBox);
+		
+		//centerPanel
 		centerPanel.add(userInputPanel);
 		centerPanel.add(resultPanel);
 		
 		TitledBorder userInteractionsBorder = BorderFactory.createTitledBorder("Users Input/Results");
 		userInteractionsBorder.setTitleJustification(TitledBorder.LEFT);
 		
+		//userInputPanel
 		userLabel.setText("Enter Password: ");
 		userInputPanel.add(userLabel);
 		userInputPanel.add(userInputField);
+		
+		//resultPanel
 		resultLabel.setText("Result: ");
 		resultPanel.add(resultLabel);
 		resultPanel.add(resultField);
@@ -88,14 +79,14 @@ public class GUI {
 		storeButton.setText("Store");
 		southPanel.add(storeButton);
 		
+		//southPanel
 		clearButton.setText("Clear");
 		clearButton.addActionListener(new ClearAction());
 		southPanel.add(clearButton);
 		
 		storeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		mainFrame.setVisible(true);
-		
+		setVisible(true);
 	}
 	
 	static public String getUserInput() {
